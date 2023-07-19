@@ -16,7 +16,9 @@ import java.util.Scanner;
 public class ClienteService {
 
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
-    private ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
+    private ArrayList<Cliente> listaClientes = new ArrayList<>();
+    
+    //private ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 
 //Constructor, getter y setter del atributo ArrayList
     public ClienteService() {
@@ -69,10 +71,16 @@ public class ClienteService {
     public void obtenerClientes() {
 
         System.out.println("");
-        for (Cliente clien : listaClientes) {
+        listaClientes.forEach((clien) -> {
             System.out.println(clien.toString());
+        });
+        
+//        for (Cliente clien : listaClientes) {
+//            System.out.println(clien.toString());
+//
+//        }
+//        System.out.println("");
 
-        }
         System.out.println("");
 
     }
@@ -81,26 +89,51 @@ public class ClienteService {
 
         System.out.println("");
 
-        for (Cliente clien : listaClientes) {
-            if (clien.getId() == id) {
-                listaClientes.get(id - 1).setNombre(nombre);
-                listaClientes.get(id - 1).setEdad(edad);
-                listaClientes.get(id - 1).setAltura(altura);
-                listaClientes.get(id - 1).setPeso(peso);
-                listaClientes.get(id - 1).setObjetivo(objetivo);
-            }
-        }
+        listaClientes.stream().filter((clien) -> (clien.getId() == id)).map((_item) -> {
+            listaClientes.get(id - 1).setNombre(nombre);
+            return _item;
+        }).map((_item) -> {
+            listaClientes.get(id - 1).setEdad(edad);
+            return _item;
+        }).map((_item) -> {
+            listaClientes.get(id - 1).setAltura(altura);
+            return _item;
+        }).map((_item) -> {
+            listaClientes.get(id - 1).setPeso(peso);
+            return _item;
+        }).forEachOrdered((_item) -> {
+            listaClientes.get(id - 1).setObjetivo(objetivo);
+        });
+        
+//        for (Cliente clien : listaClientes) {
+//            if (clien.getId() == id) {
+//                listaClientes.get(id - 1).setNombre(nombre);
+//                listaClientes.get(id - 1).setEdad(edad);
+//                listaClientes.get(id - 1).setAltura(altura);
+//                listaClientes.get(id - 1).setPeso(peso);
+//                listaClientes.get(id - 1).setObjetivo(objetivo);
+//            }
+//        }
 
         System.out.println("");
     }
 
     public void eliminarCliente(int id) {
         
-        for (Cliente clien : listaClientes){
-            if (clien.getId() == id) {
-                listaClientes.remove(clien);
-            }
-        }
+        
+        System.out.println("");
+        
+        listaClientes.stream().filter((clien) -> (clien.getId() == id)).forEachOrdered((clien) -> {
+            listaClientes.remove(clien);
+        }); 
+        
+        System.out.println("");
+        
+//        for (Cliente clien : listaClientes){
+//            if (clien.getId() == id) {
+//                listaClientes.remove(clien);
+//            }
+//        }
         
     }
 

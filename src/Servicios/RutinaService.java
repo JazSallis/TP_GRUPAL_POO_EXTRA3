@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class RutinaService {
 
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
-    private ArrayList<Rutina> listaRutinas = new ArrayList<Rutina>();
+    private ArrayList<Rutina> listaRutinas = new ArrayList<>();
 
     //constructor getter y setter del array list
     public RutinaService() {
@@ -37,33 +37,34 @@ public class RutinaService {
 
     public void obtenerRutinas() {
         System.out.println("");
-        for (Rutina rut : listaRutinas) {
+        listaRutinas.forEach((rut) -> {
             System.out.println(rut.toString());
-
-        }
+        });
         System.out.println("");
     }
 
     public void actualizarRutina(int id, String nombre, int duracion, String nivelDificultad, String descripcion) {
 
-        for (Rutina rut : listaRutinas) {
-            if (rut.getId() == id) {
-                listaRutinas.get(id - 1).setNombre(nombre);
-                listaRutinas.get(id - 1).setDuracion(duracion);
-                listaRutinas.get(id - 1).setNivelDificultad(nivelDificultad);
-                listaRutinas.get(id - 1).setDescripcion(descripcion);
-            }
-        }
+        listaRutinas.stream().filter((rut) -> (rut.getId() == id)).map((_item) -> {
+            listaRutinas.get(id - 1).setNombre(nombre);
+            return _item;
+        }).map((_item) -> {
+            listaRutinas.get(id - 1).setDuracion(duracion);
+            return _item;
+        }).map((_item) -> {
+            listaRutinas.get(id - 1).setNivelDificultad(nivelDificultad);
+            return _item;
+        }).forEachOrdered((_item) -> {
+            listaRutinas.get(id - 1).setDescripcion(descripcion);
+        });
 
     }
     
     public void eliminarRutina(int id){
         
-         for (Rutina rut : listaRutinas) {
-              if (rut.getId() == id) {
-                  listaRutinas.remove(rut);
-              }
-         }
+        listaRutinas.stream().filter((rut) -> (rut.getId() == id)).forEachOrdered((rut) -> {
+            listaRutinas.remove(rut);
+        });
     }
 
 }

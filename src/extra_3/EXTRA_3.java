@@ -29,13 +29,17 @@ public class EXTRA_3 {
         int menuClientSelec = 100;
         int menuRutinaSelec = 100;
 
+        
 //        for (int i = 0; i < 2; i++) {
 //
 //            cs.registrarCliente();
 //        }
 //
 //        cs.obtenerClientes();
-        System.out.println("Bienvenidxs al menú de opciones del GYM más canchero");
+
+
+
+        System.out.println("Bienvenidxs al menú del GYM");
 
         do {
 
@@ -92,7 +96,7 @@ public class EXTRA_3 {
                             case 4:
                                 System.out.println("Ingrese el número de ID del cliente que desea eliminar");
                                 int idDelete = leer.nextInt();
-                                System.out.println("Seleccionó el número" + idDelete + ". Es correcto?");
+                                System.out.println("Seleccionó el número " + idDelete + ". Es correcto?");
                                 System.out.println("1 - Si");
                                 System.out.println("2 - No");
                                 int DeleteSelect = leer.nextInt();
